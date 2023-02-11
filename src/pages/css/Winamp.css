@@ -1,0 +1,12 @@
+.winamp-window {
+    position: absolute;
+    z-index: 10;
+    min-height: 500px;
+    min-width: 350px;
+    height: 700px;
+    width: 1200px;
+    left: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}

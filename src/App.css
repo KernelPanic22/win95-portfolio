@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url('./assets/fonts/MS-Sans-Serif.ttf');
+}
+
+html {
+  overflow: hidden;
+}
+
+.screen{
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: relative;
+  z-index: 1;
+}
+
+#app {
+  font-family: 'MS Sans Serif';
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  flex-direction: column;
+}
+
+.background {
+  width: 100%;
+  height: 1000px;
+  background:transparent url('./assets/LainLove.gif')center center;
+  background-repeat: repeat-x repeat-y;
+  border: 1px solid black;
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+  position: fixed;
+  z-index: 0;
+}
+
+.desktop-icons{
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: fixed;
+}
+
+
+.lain {
+  position: fixed;
+  justify-content: center;
+  background: transparent url('./assets/STORM5.gif') no-repeat center center;
+  z-index: 3;
+}
+
+
+::-webkit-scrollbar {
+  width: 15px;
+  background: repeating-conic-gradient(rgb(189, 190, 189) 0% 25%, rgb(255, 255, 255) 0% 50%) 50% / 2px 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(189, 190, 189);
+  /* box-shadow: 1.5px 1.5px black; */
+  border-top: solid rgb(250, 250, 250) 1.5px;
+  border-left: solid rgb(250, 250, 250) 1.5px;
+  border-bottom: solid rgb(90, 90, 90) 1.5px;
+  border-right: solid rgb(90, 90, 90) 1.5px;
+  outline: rgb(219, 219, 219);
+}
+
+/*-------------------------------------------*\
+  Fullscreen
+\*-------------------------------------------*/
+
+.fullscreen {
+  left: 0 !important;
+  position: relative;
+  display: block;
+  top: 0 !important;
+  right: 0 !important;
+}
