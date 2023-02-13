@@ -8,7 +8,7 @@ type ComponentType = {
 };
 
 interface ComponentProps {
-    component: {
+    component: {        
         programs: ComponentType[],
         setPrograms: React.Dispatch<SetStateAction<ComponentType[]>>;
     }

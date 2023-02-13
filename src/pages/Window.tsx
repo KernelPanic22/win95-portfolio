@@ -6,6 +6,8 @@ import Biography from './windows/Biography';
 import PropTypes, { InferProps } from 'prop-types';
 import ReactDOM from 'react-dom';
 import { JsxElement } from 'typescript';
+import ProgramTaskBar from './ProgramTaskBar';
+import Github from './windows/Github';
 
 type ComponentType = {
     id: string;
@@ -29,6 +31,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
     //map of components for example: {Biography: <Biography />}
     const implementations = new Map<string, JSX.Element>();
     implementations.set('Biography', <Biography />);
+    implementations.set('Github', <Github/>);
 
 
 
@@ -37,7 +40,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
     }
 
     const getClassName = () => {
-        if (minimized) {
+        if (component.program.minimized) {
             return 'window style hidden';
         }
         if (maximized) {
@@ -46,8 +49,9 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
         return 'window style';
     }
 
+
     const minimize = () => {
-        component.setPrograms((oldPrograms) => {
+        component.setPrograms(([...oldPrograms]) => {
             const newPrograms = oldPrograms.map((program) => {
                 if (program.id === component.program.id) {
                     program.minimized = true;

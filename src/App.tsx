@@ -47,7 +47,10 @@ function App() {
         <img className="lain" src={lain} alt="imagine lain" />
       </div>
 
-      <TaskBar component={programs} />
+      <TaskBar component={{
+        programs: programs,
+        setPrograms: setPrograms
+      }} />
 
     </div>
   );

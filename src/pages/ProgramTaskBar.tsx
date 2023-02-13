@@ -6,44 +6,43 @@ type ComponentType = {
     id: string;
     icon: string;
     name: string;
+    minimized: boolean;
 };
 
 interface ComponentProps {
-    component: ComponentType;
+    component: {
+        program: ComponentType,
+        setPrograms: React.Dispatch<React.SetStateAction<ComponentType[]>>;
+    };
 }
 
 function ProgramTaskBar({ component }: PropsWithChildren<ComponentProps>) {
 
-    const [isOpen, setIsOpen] = useState(true);
-
     const openWindow = (id: string) => {
-        const windowContainer = document.getElementById('container-windows');
-        if (windowContainer?.contains(document.getElementById(`container-${id}`))) {
-            document.getElementById(`container-${id}`)?.classList.remove('hidden');
-            document.getElementById(`button-taskbar-${id}`)?.classList.remove('navbar-item');
-            document.getElementById(`button-taskbar-${id}`)?.classList.remove('open');
-            document.getElementById(`button-taskbar-${id}`)?.classList.add('navbar-item-depressed');
-        }
-    }
-
-    const windowIsOpen = (id: string) => {
-        return document.getElementById(`container-${id}`)?.classList.contains('hidden');
+        component.setPrograms(([...oldPrograms]) => {
+            const newPrograms = oldPrograms.map((program) => {
+                if (program.id === id) {
+                    program.minimized = false;
+                }
+                return program;
+            });
+            return newPrograms;
+        });
     }
 
     const getClassName = () => {
-        if (windowIsOpen(component.id)) {
+        if (component.program.minimized) {
             return 'navbar-item open';
-        } else {
-            return 'navbar-item-depressed';
         }
+        return 'navbar-item-depressed';
     }
 
     return (
-        <button id={`button-taskbar-${component.id}`}
+        <button id={`button-taskbar-${component.program.id}`}
             className={getClassName()}
-            onClick={() => { openWindow(component.id) }}>
-            <img className="icon-image" src={component.icon} />
-            <p>{component.name}</p>
+            onClick={() => { openWindow(component.program.id) }}>
+            <img className="icon-image" src={component.program.icon} />
+            <p>{component.program.name}</p>
         </button>
     );
 }

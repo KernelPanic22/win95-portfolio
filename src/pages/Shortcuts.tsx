@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component, PropsWithChildren, SetStateAction, FC, createContext } from 'react';
 import Bio from '../assets/win95Icons/bio.png';
 import Apple from '../assets/win95Icons/apple.png';
+import GithubLogo from '../assets/Icons/Github.webp'
 import './css/Shortcuts.css';
 import ReactDOM from 'react-dom';
 import Window from './Window';
@@ -15,24 +16,26 @@ type ComponentType = {
 };
 
 interface ComponentProps {
-    component: {
-        programs: ComponentType[];
+    component: {        
+        programs: ComponentType[],
         setPrograms: React.Dispatch<SetStateAction<ComponentType[]>>;
-    };
+    }
 }
 
 
 function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
     
     const open = (id: string, icon: string, name: string) => {
-        const program = {
-            id: id,
-            icon: icon,
-            name: name,
-            minimized: false
+        if (!component.programs.find((program) => program.id === id)) {
+            const program = {
+                id: id,
+                icon: icon,
+                name: name,
+                minimized: false
+            }
+            console.log("hi");
+            component.setPrograms((oldPrograms) => [...oldPrograms, program]);
         }
-        console.log("hi");
-        component.setPrograms((oldPrograms) => [...oldPrograms, program]);
     }
 
     return (
@@ -46,8 +49,8 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                 </button>
             </li>
             <li className='program-container'>
-                <button className="icon">
-                    <img src={Apple} alt="apple" className='program-logo' />
+                <button className="icon" onClick={() => open('Github',GithubLogo,'Github')}>
+                    <img src={GithubLogo} alt="apple" className='program-logo' />
                     <div className='border'>
                         <p className='icon-text'>Bio</p>
                     </div>
