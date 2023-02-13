@@ -1,9 +1,19 @@
 import './css/TaskBar.css';
 import win95 from '../assets/win95.png';
+import React, {PropsWithChildren} from 'react';
+
+type ComponentType = {
+    id: string;
+    icon: string;
+    name: string;
+};
+
+interface ComponentProps {
+    component: ComponentType[];
+}
 
 
-
-function TaskBar() {
+function TaskBar({ component }: PropsWithChildren<ComponentProps>) {
     return (
         //navbar from ./css/TaskBar.css
         <div className='wrapper'>

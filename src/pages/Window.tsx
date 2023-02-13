@@ -1,35 +1,71 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component, PropsWithChildren, SetStateAction } from 'react';
 import Draggable, { DraggableCore } from "react-draggable";
 import iconImage from '../assets/win95Icons/bio.png';
 import './css/Window.css';
 import Biography from './windows/Biography';
 import PropTypes, { InferProps } from 'prop-types';
-import { ReactDOM } from 'react';
+import ReactDOM from 'react-dom';
+import { JsxElement } from 'typescript';
 
-Window.propTypes = {
-    component: PropTypes.string.isRequired
+type ComponentType = {
+    id: string;
+    icon: string;
+    name: string;
+    minimized: boolean;
 };
 
-function Window({ component }: InferProps<typeof Window.propTypes>) {
-    const [isOpen, setIsOpen] = useState(true);
+interface ComponentProps {
+    component: {
+        programs: ComponentType[],
+        program: ComponentType,
+        setPrograms: React.Dispatch<SetStateAction<ComponentType[]>>;
+    }
+}
+
+function Window({ component }: PropsWithChildren<ComponentProps>) {
+    const [minimized, setMinimized] = useState(false);
+    const [maximized, setMaximized] = useState(false);
+
+    //map of components for example: {Biography: <Biography />}
+    const implementations = new Map<string, JSX.Element>();
+    implementations.set('Biography', <Biography />);
+
+
+
+    const getComponentToRender = (component: string) => {
+        return implementations.get(component);
+    }
+
     const getClassName = () => {
-        return isOpen ? 'window window-style' : 'window window-style hidden';
+        if (minimized) {
+            return 'window style hidden';
+        }
+        if (maximized) {
+            return 'window style maximized';
+        }
+        return 'window style';
     }
+
+    const minimize = () => {
+        component.setPrograms((oldPrograms) => {
+            const newPrograms = oldPrograms.map((program) => {
+                if (program.id === component.program.id) {
+                    program.minimized = true;
+                }
+                return program;
+            });
+            return newPrograms;
+        });
+    };
+
     const close = () => {
-        document.getElementById(`container-${component}`)?.classList.add('hidden');
-        document.getElementById(`button-taskbar-${component}`)?.classList.remove('navbar-item-depressed');
-        document.getElementById(`button-taskbar-${component}`)?.classList.add('navbar-item','open');
-        console.log(document.getElementById(`button-taskbar-${component}`));
-    }
-
-
-    const indexComponent = new Map<string, JSX.Element>([
-        ['Biography', <Biography></Biography>]
-    ]);
-
-    const getComponent = (component: string) => {
-        return indexComponent.get(component);
-    }
+        component.setPrograms((oldPrograms) => {
+            const newPrograms = oldPrograms.filter((program) => {
+                return program.id !== component.program.id;
+            });
+            return newPrograms;
+        });
+    };
 
     return (
         <Draggable>
@@ -38,17 +74,17 @@ function Window({ component }: InferProps<typeof Window.propTypes>) {
                     <div className='top-div'>
                         <img className="icon-image" src={iconImage} />Biography</div>
                     <div className="triple-button">
-                        <div className="button-hide" onClick={close}>
+                        <div className="button-hide" onClick={minimize}>
                             <span className='hide-span'></span>
                         </div>
                         <div className="button-expand" >
                             <span className='expand-span'></span></div>
-                        <div className="button-close">×</div>
+                        <div className="button-close" onClick={close}>×</div>
                     </div>
                 </div>
                 <div className="content">
                     <slot className="window-content" name="content">
-                        {getComponent(component)}
+                        {getComponentToRender(component.program.name)}
                     </slot>
                 </div>
             </div>

@@ -1,16 +1,18 @@
 import PropTypes, { InferProps } from 'prop-types';
-import React, { useState, useEffect, Component, ReactDOM } from 'react';
+import React, { useState, FunctionComponent, PropsWithChildren } from 'react';
 import './css/ProgramTaskBar.css';
 
-ProgramTaskBar.propTypes = {
-    component: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        icon: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-    }).isRequired
+type ComponentType = {
+    id: string;
+    icon: string;
+    name: string;
 };
 
-function ProgramTaskBar(componentProperties: InferProps<typeof ProgramTaskBar.propTypes>) {
+interface ComponentProps {
+    component: ComponentType;
+}
+
+function ProgramTaskBar({ component }: PropsWithChildren<ComponentProps>) {
 
     const [isOpen, setIsOpen] = useState(true);
 
@@ -29,7 +31,7 @@ function ProgramTaskBar(componentProperties: InferProps<typeof ProgramTaskBar.pr
     }
 
     const getClassName = () => {
-        if (windowIsOpen(componentProperties.component.id)) {
+        if (windowIsOpen(component.id)) {
             return 'navbar-item open';
         } else {
             return 'navbar-item-depressed';
@@ -37,11 +39,11 @@ function ProgramTaskBar(componentProperties: InferProps<typeof ProgramTaskBar.pr
     }
 
     return (
-        <button id={`button-taskbar-${componentProperties.component.id}`}
+        <button id={`button-taskbar-${component.id}`}
             className={getClassName()}
-            onClick={() => { openWindow(componentProperties.component.id) }}>
-            <img className="icon-image" src={componentProperties.component.icon} />
-            <p>{componentProperties.component.name}</p>
+            onClick={() => { openWindow(component.id) }}>
+            <img className="icon-image" src={component.icon} />
+            <p>{component.name}</p>
         </button>
     );
 }
