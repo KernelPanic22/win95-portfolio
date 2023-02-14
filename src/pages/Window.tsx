@@ -52,7 +52,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
         if (component.program.active) {
             return 'window style active';
         }
-        
+
         return 'window style';
     }
 
@@ -99,7 +99,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
                 onClick={onClickMakeActive}>
                 <div className="top-bar" id="top-bar">
                     <div className='top-div'>
-                        <img className="icon-image" src={iconImage} />Biography</div>
+                        <img className="icon-image" src={iconImage} />{component.program.name}</div>
                     <div className="triple-button">
                         <div className="button-hide" onClick={minimize}>
                             <span className='hide-span'></span>
