@@ -9,9 +9,6 @@
 /coverage
 
 # firebase
-/firebase.json
-/firebase-debug.log
-.firebaserc
 .firebase
 
 # production
