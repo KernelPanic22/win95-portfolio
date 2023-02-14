@@ -196,6 +196,7 @@ p {
     align-items: flex-end;
     outline: rgb(222, 222, 222) 1px solid;
     position: absolute;
+    right: 20%;
     z-index: 4;
 }
 
