@@ -7,6 +7,7 @@ type ComponentType = {
     icon: string;
     name: string;
     minimized: boolean;
+    active: boolean;
 };
 
 interface ComponentProps {
@@ -17,12 +18,14 @@ interface ComponentProps {
 }
 
 function ProgramTaskBar({ component }: PropsWithChildren<ComponentProps>) {
-
     const openWindow = (id: string) => {
         component.setPrograms(([...oldPrograms]) => {
             const newPrograms = oldPrograms.map((program) => {
                 if (program.id === id) {
                     program.minimized = false;
+                    program.active = true;
+                } else {
+                    program.active = false;
                 }
                 return program;
             });
@@ -30,11 +33,14 @@ function ProgramTaskBar({ component }: PropsWithChildren<ComponentProps>) {
         });
     }
 
+
+
     const getClassName = () => {
-        if (component.program.minimized) {
+        if(component.program.active && !component.program.minimized){
+            return 'navbar-item-depressed';
+        }else{
             return 'navbar-item open';
         }
-        return 'navbar-item-depressed';
     }
 
     return (

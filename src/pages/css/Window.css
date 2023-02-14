@@ -199,6 +199,10 @@ p {
     z-index: 4;
 }
 
+.active{
+    z-index: 5;
+}
+
 .self {
     width: 100%;
     height: auto;
