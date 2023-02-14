@@ -99,7 +99,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
                 onClick={onClickMakeActive}>
                 <div className="top-bar" id="top-bar">
                     <div className='top-div'>
-                        <img className="icon-image" src={iconImage} />{component.program.name}</div>
+                        <img className="icon-image" src={component.program.icon} />{component.program.name}</div>
                     <div className="triple-button">
                         <div className="button-hide" onClick={minimize}>
                             <span className='hide-span'></span>
