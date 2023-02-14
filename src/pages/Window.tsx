@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import { JsxElement } from 'typescript';
 import ProgramTaskBar from './ProgramTaskBar';
 import Github from './windows/Github';
+import Resume from './windows/Resume';
 
 type ComponentType = {
     id: string;
@@ -33,6 +34,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
     const implementations = new Map<string, JSX.Element>();
     implementations.set('Biography', <Biography />);
     implementations.set('Github', <Github />);
+    implementations.set('Resume', <Resume />);
 
 
 
