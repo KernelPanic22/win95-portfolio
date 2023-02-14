@@ -14,6 +14,7 @@ type ComponentType = {
     icon: string;
     name: string;
     minimized: boolean;
+    active: boolean;
 };
 
 interface ComponentProps {
@@ -31,7 +32,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
     //map of components for example: {Biography: <Biography />}
     const implementations = new Map<string, JSX.Element>();
     implementations.set('Biography', <Biography />);
-    implementations.set('Github', <Github/>);
+    implementations.set('Github', <Github />);
 
 
 
@@ -46,6 +47,10 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
         if (maximized) {
             return 'window style maximized';
         }
+        if (component.program.active) {
+            return 'window style active';
+        }
+        
         return 'window style';
     }
 
@@ -71,9 +76,25 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
         });
     };
 
+    const onClickMakeActive = () => {
+        component.setPrograms((oldPrograms) => {
+            const newPrograms = oldPrograms.map((program) => {
+                if (program.id === component.program.id) {
+                    program.active = true;
+                } else {
+                    program.active = false;
+                }
+                return program;
+            });
+            return newPrograms;
+        });
+    };
+
     return (
         <Draggable>
-            <div className={getClassName()} id={`container-${component}`}>
+            <div className={getClassName()}
+                id={`container-${component}`}
+                onClick={onClickMakeActive}>
                 <div className="top-bar" id="top-bar">
                     <div className='top-div'>
                         <img className="icon-image" src={iconImage} />Biography</div>

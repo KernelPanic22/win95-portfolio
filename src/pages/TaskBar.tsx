@@ -9,6 +9,7 @@ type ComponentType = {
     icon: string;
     name: string;
     minimized: boolean;
+    active: boolean;
 };
 
 interface ComponentProps {

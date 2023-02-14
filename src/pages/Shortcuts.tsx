@@ -13,6 +13,7 @@ type ComponentType = {
     icon: string;
     name: string;
     minimized: boolean;
+    active: boolean;
 };
 
 interface ComponentProps {
@@ -31,9 +32,9 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                 id: id,
                 icon: icon,
                 name: name,
-                minimized: false
-            }
-            console.log("hi");
+                minimized: false,
+                active: true
+            };
             component.setPrograms((oldPrograms) => [...oldPrograms, program]);
         }
     }
