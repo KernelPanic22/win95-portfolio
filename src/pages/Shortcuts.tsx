@@ -4,7 +4,6 @@ import GithubLogo from '../assets/Icons/git.png'
 import ResumeIcon from '../assets/Icons/userCard.png'
 import './css/Shortcuts.css';
 
-
 type ComponentType = {
     id: string;
     icon: string;
@@ -20,9 +19,7 @@ interface ComponentProps {
     }
 }
 
-
-function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
-    
+function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {    
     const open = (id: string, icon: string, name: string) => {
         if (!component.programs.find((program) => program.id === id)) {
             const program = {
@@ -32,7 +29,26 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                 minimized: false,
                 active: true
             };
-            component.setPrograms((oldPrograms) => [...oldPrograms, program]);
+            
+            component.programs.map((program) => {
+                if (program.id !== id) {
+                    program.active = false
+                }
+            });
+            component.setPrograms([...component.programs, program]);
+        } else {
+            component.setPrograms(([...oldPrograms]) => {
+                const newPrograms = oldPrograms.map((program) => {
+                    if (program.id === id) {
+                        program.minimized = false;
+                        program.active = true;
+                    } else {
+                        program.active = false;
+                    }
+                    return program;
+                });
+                return newPrograms;
+            });
         }
     }
 

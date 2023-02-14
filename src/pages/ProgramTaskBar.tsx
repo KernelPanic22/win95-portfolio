@@ -48,7 +48,7 @@ function ProgramTaskBar({ component }: PropsWithChildren<ComponentProps>) {
             className={getClassName()}
             onClick={() => { openWindow(component.program.id) }}>
             <img className="icon-image" src={component.program.icon} />
-            <p>{component.program.name}</p>
+            <p className='taskbar-program-name'>{component.program.name}</p>
         </button>
     );
 }
