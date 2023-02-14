@@ -1,12 +1,9 @@
 import React, { useState, useEffect, Component, PropsWithChildren, SetStateAction, FC, createContext } from 'react';
 import Bio from '../assets/win95Icons/bio.png';
-import Apple from '../assets/win95Icons/apple.png';
-import GithubLogo from '../assets/Icons/Github.webp'
+import GithubLogo from '../assets/Icons/git.png'
+import ResumeIcon from '../assets/Icons/userCard.png'
 import './css/Shortcuts.css';
-import ReactDOM from 'react-dom';
-import Window from './Window';
-import ProgramTaskBar from './ProgramTaskBar';
-import Biography from './windows/Biography';
+
 
 type ComponentType = {
     id: string;
@@ -45,7 +42,7 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                 <button className="icon" onClick={() => open('Biography', Bio, 'Biography')}>
                     <img src={Bio} alt="bio" className='program-logo' />
                     <div className='border'>
-                        <p className='icon-text'>Bio</p>
+                        <p className='icon-text'>Biography</p>
                     </div>
                 </button>
             </li>
@@ -53,7 +50,15 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                 <button className="icon" onClick={() => open('Github',GithubLogo,'Github')}>
                     <img src={GithubLogo} alt="apple" className='program-logo' />
                     <div className='border'>
-                        <p className='icon-text'>Bio</p>
+                        <p className='icon-text'>Github</p>
+                    </div>
+                </button>
+            </li>
+            <li className='program-container'>
+                <button className="icon" onClick={() => open('Resume',ResumeIcon,'Resume')}>
+                    <img src={ResumeIcon} alt="apple" className='program-logo' />
+                    <div className='border'>
+                        <p className='icon-text'>Resume</p>
                     </div>
                 </button>
             </li>
