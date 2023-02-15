@@ -1,8 +1,7 @@
 import './css/TaskBar.css';
-import win95 from '../assets/win95.png';
 import React, { PropsWithChildren } from 'react';
-import ProgramTaskBar from './ProgramTaskBar';
 import ProgramsTaskBarFactory from './ProgramsTaskBarFactory';
+import Start from './Start';
 
 type ComponentType = {
     id: string;
@@ -16,28 +15,24 @@ interface ComponentProps {
     component: {
         programs: ComponentType[];
         setPrograms: React.Dispatch<React.SetStateAction<ComponentType[]>>;
+        visible: boolean;
+        setStartMenu: React.Dispatch<React.SetStateAction<boolean>>;
     };
 }
 
 function TaskBar({ component }: PropsWithChildren<ComponentProps>) {
-
-
-    return (
-        //navbar from ./css/TaskBar.css
-        <div className='wrapper'>
-            <div className='bar-container' id='task-bar'>
-                <div className="start-menu">
-                    <div className="container-border">
-                        <img src={win95} alt='win-logo' />
-                        <div className="start-menu-text">
-                            <span>Start</span>
-                        </div>
-                    </div>
+        return (
+            //navbar from ./css/TaskBar.css
+            <div className='wrapper'>
+                <div className='bar-container' id='task-bar'>
+                    <Start component={{
+                        visible: component.visible,
+                        setStartMenu: component.setStartMenu
+                    }}></Start>
+                    <ProgramsTaskBarFactory component={component}></ProgramsTaskBarFactory>
                 </div>
-                <ProgramsTaskBarFactory component={component}></ProgramsTaskBarFactory>
             </div>
-        </div>
-    );
-}
+        );
+    }
 
-export default TaskBar;
+    export default TaskBar;

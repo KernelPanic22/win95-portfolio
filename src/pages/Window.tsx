@@ -47,7 +47,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
             return 'window style hidden';
         }
         if (maximized) {
-            return 'window style maximized';
+            return 'window style fullscreen';
         }
         if (component.program.active) {
             return 'window style active';
@@ -67,6 +67,10 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
             });
             return newPrograms;
         });
+    };
+
+    const maximize = () => {
+        setMaximized(!maximized);
     };
 
     const close = () => {
@@ -104,7 +108,7 @@ function Window({ component }: PropsWithChildren<ComponentProps>) {
                         <div className="button-hide" onClick={minimize}>
                             <span className='hide-span'></span>
                         </div>
-                        <div className="button-expand" >
+                        <div className="button-expand" onClick={maximize}>
                             <span className='expand-span'></span></div>
                         <div className="button-close" onClick={close}>×</div>
                     </div>
