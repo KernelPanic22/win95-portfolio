@@ -21,10 +21,10 @@ function Start({ component }: PropsWithChildren<ComponentType>) {
     return (
         <div className='menu-container'>
             <div className="start-menu">
-                <div className="container-border">
+                <div className="container-border" onClick={openStartMenu}>
                     <img src={win95} alt='win-logo' />
                     <div className="start-menu-text">
-                        <span onClick={openStartMenu}>Start</span>
+                        <span>Start</span>
                     </div>
                 </div>
             </div>

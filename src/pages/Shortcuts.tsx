@@ -62,6 +62,7 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                     </div>
                 </button>
             </li>
+            {/*
             <li className='program-container'>
                 <button className="icon" onClick={() => open('Github',GithubLogo,'Github')}>
                     <img src={GithubLogo} alt="apple" className='program-logo' />
@@ -69,7 +70,7 @@ function ShortCuts({ component }: PropsWithChildren<ComponentProps>) {
                         <p className='icon-text'>Github</p>
                     </div>
                 </button>
-            </li>
+            </li>*/}
             <li className='program-container'>
                 <button className="icon" onClick={() => open('Resume',ResumeIcon,'Resume')}>
                     <img src={ResumeIcon} alt="apple" className='program-logo' />

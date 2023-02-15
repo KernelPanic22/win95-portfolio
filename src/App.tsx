@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import TaskBar from './pages/TaskBar';
 import Shortcuts from './pages/Shortcuts';
@@ -24,31 +24,34 @@ function App() {
 
   return (
     <>
-    <div className="screen" id='app'>
-      <div className="background">
-        <div className="desktop-icons">
-          <Shortcuts component={{
-            programs: programs,
-            setPrograms: setPrograms
-          }}></Shortcuts>
-        </div>
-        <div id='container-windows'>
-          <Desktop component={{
-            programs: programs,
-            setPrograms: setPrograms
-          }}></Desktop>
-        </div>
+      <div className="screen" id='app'>
+        <div className="background">
+          <div className="desktop-icons">
+            <Shortcuts component={{
+              programs: programs,
+              setPrograms: setPrograms
+            }}></Shortcuts>
+          </div>
+          <div id='container-windows'>
+            <Desktop component={{
+              programs: programs,
+              setPrograms: setPrograms
+            }}></Desktop>
+          </div>
 
-        <img className="lain" src={lain} alt="imagine lain" />
+          <img className="lain" src={lain} alt="imagine lain" />
+        </div>
+        {startMenu ? <StartMenu component={{
+          visible: startMenu,
+          setStartMenu: setStartMenu
+        }}></StartMenu> : null}
       </div>
-      {startMenu ? <StartMenu></StartMenu> : null}  
-    </div>
-    <TaskBar component={{
-      programs: programs,
-      setPrograms: setPrograms,
-      visible: startMenu,
-      setStartMenu: setStartMenu
-    }} />
+      <TaskBar component={{
+        programs: programs,
+        setPrograms: setPrograms,
+        visible: startMenu,
+        setStartMenu: setStartMenu
+      }} />
     </>
   );
 }

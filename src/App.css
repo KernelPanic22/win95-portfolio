@@ -12,7 +12,7 @@ html {
   background: black;
   flex-direction: column;
   align-items: stretch;
-  height: 800px;
+  height: 930px;
   position: relative;
   z-index: 1;
 }
