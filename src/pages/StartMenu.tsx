@@ -27,7 +27,7 @@ function StartMenu({component}: PropsWithChildren<ComponentProps>) {
     useOnClickOutside(ref, handleClickOutside);
 
     return (
-        <div className='socials-menu' >
+        <div className='socials-menu' ref={ref}>
             <div className='sidebar-menu'>
                 <img src={sideBar} alt='sidebar-img' />
             </div>
